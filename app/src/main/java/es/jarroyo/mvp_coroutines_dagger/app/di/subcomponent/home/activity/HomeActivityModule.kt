@@ -5,6 +5,7 @@ import dagger.Provides
 import es.jarroyo.mvp_coroutines_dagger.app.di.module.ActivityModule
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
 import es.jarroyo.mvp_coroutines_dagger.data.repository.ForecastRepository
+import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposUseCase
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeActivity
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomePresenter
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeView
@@ -19,8 +20,8 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
     fun providePresenter(
         view: HomeView,
         navigator: Navigator,
-        forecastRepository: ForecastRepository
-    ) = HomePresenter(view, navigator, forecastRepository)
+        getGitHubReposUseCase: GetGitHubReposUseCase
+    ) = HomePresenter(view, navigator, getGitHubReposUseCase)
 
 
 }

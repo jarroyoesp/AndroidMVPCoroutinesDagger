@@ -1,7 +1,7 @@
 package com.microhealth.lmc.ui.base
 
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
-import es.jarroyo.mvp_coroutines_dagger.domain.usecase.BaseResponse
+import es.jarroyo.mvp_coroutines_dagger.domain.usecase.base.BaseResponse
 
 
 interface Presenter<out T : PresentationView> :

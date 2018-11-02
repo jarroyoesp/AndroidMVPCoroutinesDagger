@@ -1,4 +1,4 @@
-package es.jarroyo.mvp_coroutines_dagger.domain.usecase
+package es.jarroyo.mvp_coroutines_dagger.domain.usecase.base
 
 interface BaseResponse {
 
