@@ -4,6 +4,7 @@ import android.os.Bundle
 import es.jarroyo.mvp_coroutines_dagger.R
 import es.jarroyo.mvp_coroutines_dagger.app.di.component.ApplicationComponent
 import es.jarroyo.mvp_coroutines_dagger.app.di.subcomponent.home.activity.HomeActivityModule
+import es.jarroyo.mvp_coroutines_dagger.data.source.network.GithubAPI
 import es.jarroyo.mvp_coroutines_dagger.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
@@ -28,8 +29,12 @@ class HomeActivity : BaseActivity(), HomeView {
     /**
      * PRESENTATION VIEW
      */
-    override fun showData(data: String) {
-        activity_home_tv_title.text = data
+    override fun showData(data: List<GithubAPI.Repo>) {
+        var text = ""
+        for (repo in data) {
+            text = "$text\n${repo.name}"
+        }
+        activity_home_tv_title.text = text
     }
 
 }

@@ -2,6 +2,7 @@ package es.jarroyo.mvp_coroutines_dagger.ui.home.activity
 
 import com.microhealth.lmc.ui.base.Presenter
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
+import es.jarroyo.mvp_coroutines_dagger.data.repository.ForecastRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -9,7 +10,8 @@ import kotlinx.coroutines.launch
 
 class HomePresenter(
     override val view: HomeView,
-    override val navigator: Navigator
+    override val navigator: Navigator,
+    val forecastRepository: ForecastRepository
 ) : Presenter<HomeView> {
 
     /**
@@ -28,7 +30,8 @@ class HomePresenter(
 
     fun getData() {
         uiScope.launch {
-
+            val result = forecastRepository.getForecastData()
+            view.showData(result)
         }
     }
 
