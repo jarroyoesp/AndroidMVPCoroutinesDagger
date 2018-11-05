@@ -6,4 +6,7 @@ import es.jarroyo.mvp_coroutines_dagger.data.source.network.GithubAPI
 interface HomeView: PresentationView {
     fun showData(data: List<GithubAPI.Repo>)
     fun showError(message: String)
+
+    fun onSuccessGetContributors(data: List<GithubAPI.Contributor>)
+    fun onErrorGetContributors(message: String)
 }

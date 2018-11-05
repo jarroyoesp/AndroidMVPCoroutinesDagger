@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import es.jarroyo.mvp_coroutines_dagger.app.di.module.ActivityModule
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
+import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsUseCase
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposUseCase
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeActivity
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomePresenter
@@ -19,8 +20,9 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
     fun providePresenter(
         view: HomeView,
         navigator: Navigator,
-        getGitHubReposUseCase: GetGitHubReposUseCase
-    ) = HomePresenter(view, navigator, getGitHubReposUseCase)
+        getGitHubReposUseCase: GetGitHubReposUseCase,
+        getGitHubContributorsUseCase: GetGitHubContributorsUseCase
+    ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase)
 
 
 }

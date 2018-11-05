@@ -41,4 +41,17 @@ class HomeActivity : BaseActivity(), HomeView {
         activity_home_tv_title.text = message
     }
 
+
+    override fun onSuccessGetContributors(data: List<GithubAPI.Contributor>) {
+        var text = ""
+        for (contributor in data) {
+            text = "$text\n${contributor.login}"
+        }
+        activity_home_tv_contributors.text = text
+    }
+
+    override fun onErrorGetContributors(message: String) {
+        activity_home_tv_contributors.text = message
+    }
+
 }
