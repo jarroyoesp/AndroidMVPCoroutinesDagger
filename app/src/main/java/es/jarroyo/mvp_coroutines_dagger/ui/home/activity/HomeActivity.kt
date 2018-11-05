@@ -37,4 +37,8 @@ class HomeActivity : BaseActivity(), HomeView {
         activity_home_tv_title.text = text
     }
 
+    override fun showError(message: String) {
+        activity_home_tv_title.text = message
+    }
+
 }

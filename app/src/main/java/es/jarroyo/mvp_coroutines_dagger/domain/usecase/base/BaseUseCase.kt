@@ -8,10 +8,10 @@ abstract class BaseUseCase<R : BaseRequest, T>() {
         this.request = request
 
         val validated = request?.validate() ?: true
-        if(validated) return Response(run())
-        return Response(data = null)
+        if(validated) return run()
+        return Response(data = null, error = "Error validating request data")
     }
 
-    abstract suspend fun run(): T
+    abstract suspend fun run(): Response<T>
 }
 

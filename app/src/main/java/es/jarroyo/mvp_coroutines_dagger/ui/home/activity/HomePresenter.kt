@@ -33,8 +33,11 @@ class HomePresenter(
         uiScope.launch {
             val request = GetGitHubReposRequest("jarroyoesp")
             val result = getGitHubReposUseCase.execute(request)
+
             if (result.error == null && result.data != null) {
                 view.showData(result.data!!)
+            } else if (result.error != null) {
+                view.showError(result.error!!)
             }
         }
     }
