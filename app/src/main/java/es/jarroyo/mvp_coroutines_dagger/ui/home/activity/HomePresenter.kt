@@ -2,6 +2,7 @@ package es.jarroyo.mvp_coroutines_dagger.ui.home.activity
 
 import com.microhealth.lmc.ui.base.Presenter
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
+import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,8 +31,11 @@ class HomePresenter(
 
     fun getData() {
         uiScope.launch {
-            val result = getGitHubReposUseCase.execute()
-            view.showData(result)
+            val request = GetGitHubReposRequest("jarroyoesp")
+            val result = getGitHubReposUseCase.execute(request)
+            if (result.error == null && result.data != null) {
+                view.showData(result.data!!)
+            }
         }
     }
 
