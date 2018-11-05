@@ -29,7 +29,7 @@ class HomeActivity : BaseActivity(), HomeView {
     /**
      * PRESENTATION VIEW
      */
-    override fun showData(data: List<GithubAPI.Repo>) {
+    override fun onSuccessGetRepositories(data: List<GithubAPI.Repo>) {
         var text = ""
         for (repo in data) {
             text = "$text\n${repo.name}"
@@ -37,7 +37,7 @@ class HomeActivity : BaseActivity(), HomeView {
         activity_home_tv_title.text = text
     }
 
-    override fun showError(message: String) {
+    override fun onErrorGetRepositories(message: String) {
         activity_home_tv_title.text = message
     }
 
