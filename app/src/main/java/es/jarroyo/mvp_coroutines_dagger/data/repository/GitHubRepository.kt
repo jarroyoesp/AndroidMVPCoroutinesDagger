@@ -4,19 +4,20 @@ package es.jarroyo.mvp_coroutines_dagger.data.repository
 import es.jarroyo.mvp_coroutines_dagger.data.source.disk.DiskDataSource
 import es.jarroyo.mvp_coroutines_dagger.data.source.network.GithubAPI
 import es.jarroyo.mvp_coroutines_dagger.data.source.network.NetworkDataSource
+import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 
-class ForecastRepository(private val networkDataSource: NetworkDataSource,
-                         private val diskDataSource: DiskDataSource
+class GitHubRepository(private val networkDataSource: NetworkDataSource,
+                       private val diskDataSource: DiskDataSource
 ) {
 
-    val TAG = ForecastRepository::class.java.simpleName
+    val TAG = GitHubRepository::class.java.simpleName
 
 
     /***********************************************************************************************
      * GET DATA FORECAST
      **********************************************************************************************/
-    suspend fun getForecastData(): List<GithubAPI.Repo> {
-        val result = networkDataSource.getGitHubData()
+    suspend fun getGitHubRepos(request: GetGitHubReposRequest): List<GithubAPI.Repo> {
+        val result = networkDataSource.getGitHubData(request)
         return result
     }
 }
