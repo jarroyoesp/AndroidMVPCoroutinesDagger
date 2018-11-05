@@ -2,6 +2,7 @@ package es.jarroyo.mvp_coroutines_dagger.ui.home.activity
 
 import com.microhealth.lmc.ui.base.Presenter
 import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
+import es.jarroyo.mvp_coroutines_dagger.data.source.network.GithubAPI
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsUseCase
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
@@ -32,28 +33,40 @@ class HomePresenter(
      */
     private val uiScope = CoroutineScope(Dispatchers.Main + presenterJob)
 
-    fun getData() {
+    /**
+     * GET REPOSITORIES FROM GITHUB
+     */
+    fun getRepositoriesList() {
         uiScope.launch {
             val request = GetGitHubReposRequest("jarroyoesp")
             val result = getGitHubReposUseCase.execute(request)
             if (result.error == null && result.data != null) {
-                view.onSuccessGetRepositories(result.data!!)
+                onSuccesGetRepositoriesList(result.data!!)
             } else if (result.error != null) {
-                view.onErrorGetRepositories(result.error!!)
+
             }
-
-
-            val request2 = GetGitHubContributorsRequest("jarroyoesp", "tensorFlow")
-            val result2 = getGitHubContributorsUseCase.execute(request2)
-            if (result2.error == null && result2.data != null) {
-                view.onSuccessGetContributors(result2.data!!)
-            } else if (result.error != null) {
-                view.onErrorGetContributors(result.error!!)
-            }
-
         }
     }
 
+    fun onSuccesGetRepositoriesList(repositoriesList: List<GithubAPI.Repo>){
+        view.onSuccessGetRepositories(repositoriesList)
+        getContributors("jarroyoesp", repositoriesList.get(0).name)
+    }
+
+    /**
+     * GET CONTRIBUTORS FFROM REPOSITORY
+     */
+    fun getContributors(owner: String, repositorieName: String){
+        uiScope.launch {
+            val request2 = GetGitHubContributorsRequest(owner, repositorieName)
+            val result2 = getGitHubContributorsUseCase.execute(request2)
+            if (result2.error == null && result2.data != null) {
+                view.onSuccessGetContributors(result2.data!!)
+            } else if (result2.error != null) {
+                view.onErrorGetContributors(result2.error!!)
+            }
+        }
+    }
 
     override fun clearView() {
     }
