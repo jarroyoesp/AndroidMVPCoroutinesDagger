@@ -8,12 +8,12 @@ import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGit
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class NetworkDataSource(private val networkSystem: NetworkSystemAbstract) {
+class NetworkDataSource(private val networkSystem: NetworkSystemAbstract): INetworkDataSource(networkSystem) {
 
     /**
      * GET GITHUB DATA
      */
-    suspend fun getGitHubData(request: GetGitHubReposRequest): List<GithubAPI.Repo>{
+    override suspend fun getGitHubData(request: GetGitHubReposRequest): List<GithubAPI.Repo>{
 
         if (networkSystem.isNetworkAvailable()) {
             val retrofit = Retrofit.Builder().apply {
@@ -36,7 +36,7 @@ class NetworkDataSource(private val networkSystem: NetworkSystemAbstract) {
     /**
      * GET GITHUB DATA
      */
-    suspend fun getGitHubContributors(request: GetGitHubContributorsRequest): List<GithubAPI.Contributor>{
+    override suspend fun getGitHubContributors(request: GetGitHubContributorsRequest): List<GithubAPI.Contributor>{
 
         if (networkSystem.isNetworkAvailable()) {
             val retrofit = Retrofit.Builder().apply {

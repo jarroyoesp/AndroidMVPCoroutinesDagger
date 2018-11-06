@@ -3,11 +3,11 @@ package es.jarroyo.mvp_coroutines_dagger.data.repository
 
 import es.jarroyo.mvp_coroutines_dagger.data.source.disk.DiskDataSource
 import es.jarroyo.mvp_coroutines_dagger.data.source.network.GithubAPI
-import es.jarroyo.mvp_coroutines_dagger.data.source.network.NetworkDataSource
+import es.jarroyo.mvp_coroutines_dagger.data.source.network.INetworkDataSource
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 
-class GitHubRepository(private val networkDataSource: NetworkDataSource,
+class GitHubRepository(private val networkDataSource: INetworkDataSource,
                        private val diskDataSource: DiskDataSource
 ) {
 

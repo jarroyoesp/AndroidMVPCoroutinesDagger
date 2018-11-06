@@ -43,7 +43,7 @@ class HomePresenter(
             if (result.error == null && result.data != null) {
                 onSuccesGetRepositoriesList(result.data!!)
             } else if (result.error != null) {
-
+                view.onErrorGetContributors(result.error!!)
             }
         }
     }

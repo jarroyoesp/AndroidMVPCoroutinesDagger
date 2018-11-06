@@ -4,8 +4,8 @@ import com.microhealth.lmc.utils.NetworkSystemAbstract
 import dagger.Module
 import dagger.Provides
 import es.jarroyo.mvp_coroutines_dagger.data.source.disk.DiskDataSource
+import es.jarroyo.mvp_coroutines_dagger.data.source.network.FakeNetworkDataSource
 import es.jarroyo.mvp_coroutines_dagger.data.source.network.INetworkDataSource
-import es.jarroyo.mvp_coroutines_dagger.data.source.network.NetworkDataSource
 import es.jarroyo.mvp_coroutines_dagger.ui.App
 import javax.inject.Singleton
 
@@ -19,6 +19,6 @@ class DataModule {
 
     @Provides @Singleton
     fun provideNetworkDataSource(networkSystemBase: NetworkSystemAbstract)
-            = NetworkDataSource(networkSystemBase) as INetworkDataSource
+            = FakeNetworkDataSource(networkSystemBase) as INetworkDataSource
 
 }
