@@ -1,6 +1,5 @@
 package es.jarroyo.mvp_coroutines_dagger.app.di.module
 
-
 import com.microhealth.lmc.utils.NetworkSystem
 import com.microhealth.lmc.utils.NetworkSystemAbstract
 import dagger.Module
@@ -12,6 +11,6 @@ import javax.inject.Singleton
 class UtilsModule {
     @Provides
     @Singleton
-    fun provideNetworkSystem(app: App)
-            = NetworkSystem(app) as NetworkSystemAbstract
+    fun provideNetworkSystem(app: App) =
+            NetworkSystem(app) as NetworkSystemAbstract
 }

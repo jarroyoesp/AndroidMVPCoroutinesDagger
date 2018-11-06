@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import es.jarroyo.mvp_coroutines_dagger.ui.base.BaseActivity
 
-
 class Navigator {
 
     var currentActivity: BaseActivity? = null
@@ -47,7 +46,7 @@ class Navigator {
     /**
      * ADD HOME FRAGMENT
      */
-    fun addHomeFragment (contentIdLayout : Int) {
+    fun addHomeFragment(contentIdLayout: Int) {
         /*var homeFragment = HomeFragment()
         val ft = currentActivity?.supportFragmentManager?.beginTransaction()
         ft?.addToBackStack(HomeFragment::class.java.simpleName)

@@ -9,9 +9,7 @@ import es.jarroyo.mvp_coroutines_dagger.app.navigator.Navigator
 import es.jarroyo.mvp_coroutines_dagger.ui.App
 import javax.inject.Inject
 
-
-
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var navigator: Navigator
@@ -24,7 +22,6 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupInjection(App.graph)
         initView()
-
     }
 
     override fun onResume() {

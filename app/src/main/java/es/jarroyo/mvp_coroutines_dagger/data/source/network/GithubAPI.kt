@@ -12,16 +12,12 @@ interface GithubAPI {
         @Path("repo") repo: String
     ): Deferred<List<Contributor>>
 
-
-
     @GET("users/{user}/repos")
     fun listRepos(@Path("user") user: String): Deferred<List<Repo>>
 
     @GET("/users/defunkt")
-    fun users(
-    ): Deferred<String>
+    fun users(): Deferred<String>
 
     data class Contributor(val login: String, val contributions: Int)
     data class Repo(val name: String)
-
 }

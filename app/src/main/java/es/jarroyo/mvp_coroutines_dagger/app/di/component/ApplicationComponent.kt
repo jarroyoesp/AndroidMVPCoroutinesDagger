@@ -6,7 +6,6 @@ import es.jarroyo.mvp_coroutines_dagger.app.di.subcomponent.home.activity.HomeAc
 import es.jarroyo.mvp_coroutines_dagger.app.di.subcomponent.home.activity.HomeActivityModule
 import javax.inject.Singleton
 
-
 @Singleton
 @Component(
     modules = arrayOf(

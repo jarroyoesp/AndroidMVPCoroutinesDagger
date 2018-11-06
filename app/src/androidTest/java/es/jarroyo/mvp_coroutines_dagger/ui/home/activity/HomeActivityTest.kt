@@ -17,8 +17,7 @@ class HomeActivityTest {
 
     @Rule
     @JvmField
-    var mActivityRule= BaseActivityRule(HomeActivity::class.java, true, false)
-
+    var mActivityRule = BaseActivityRule(HomeActivity::class.java, true, false)
 
     /**
      * Test that checks if network is not available show No internet connection error
@@ -37,5 +36,4 @@ class HomeActivityTest {
             )
         )))
     }
-
 }

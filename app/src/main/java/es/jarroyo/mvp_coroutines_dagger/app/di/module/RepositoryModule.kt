@@ -12,6 +12,8 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideForecastRepository(networkDataSource: INetworkDataSource,
-                                  diskDataSource: DiskDataSource) = GitHubRepository(networkDataSource, diskDataSource)
+    fun provideForecastRepository(
+        networkDataSource: INetworkDataSource,
+        diskDataSource: DiskDataSource
+    ) = GitHubRepository(networkDataSource, diskDataSource)
 }

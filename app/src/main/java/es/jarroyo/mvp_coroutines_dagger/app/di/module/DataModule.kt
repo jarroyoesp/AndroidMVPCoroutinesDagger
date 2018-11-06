@@ -12,13 +12,11 @@ import javax.inject.Singleton
 @Module
 class DataModule {
 
+    @Provides @Singleton
+    fun provideDiskDataSource(appContext: App) =
+            DiskDataSource(appContext)
 
     @Provides @Singleton
-    fun provideDiskDataSource(appContext: App)
-            = DiskDataSource(appContext)
-
-    @Provides @Singleton
-    fun provideNetworkDataSource(networkSystemBase: NetworkSystemAbstract)
-            = NetworkDataSource(networkSystemBase) as INetworkDataSource
-
+    fun provideNetworkDataSource(networkSystemBase: NetworkSystemAbstract) =
+            NetworkDataSource(networkSystemBase) as INetworkDataSource
 }

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 
-
 class BaseActivityRule<A : Activity>(activityClass: Class<A>, initialTouchMode: Boolean, launchActivity: Boolean) : ActivityTestRule<A>(activityClass, initialTouchMode, launchActivity) {
 
     override fun beforeActivityLaunched() {
@@ -26,16 +25,16 @@ class BaseActivityRule<A : Activity>(activityClass: Class<A>, initialTouchMode: 
     }
 
     override fun afterActivityFinished() {
-        //super.afterActivityFinshed()
+        // super.afterActivityFinshed()
         // Clean up mocks
-        //DiskDataSource(getContext()).deleteAllTables()
+        // DiskDataSource(getContext()).deleteAllTables()
     }
 
     fun launchActivity() {
         this.launchActivity(getActivityIntent())
     }
 
-    fun getContext(): Context{
+    fun getContext(): Context {
         return InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext()
     }
 }

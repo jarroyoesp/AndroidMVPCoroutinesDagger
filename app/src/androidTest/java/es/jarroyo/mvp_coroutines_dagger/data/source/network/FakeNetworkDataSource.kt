@@ -5,12 +5,12 @@ import com.microhealth.lmc.utils.NetworkSystemAbstract
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 
-class FakeNetworkDataSource(private val networkSystem: NetworkSystemAbstract): INetworkDataSource(networkSystem) {
+class FakeNetworkDataSource(private val networkSystem: NetworkSystemAbstract) : INetworkDataSource(networkSystem) {
 
     /**
      * GET GITHUB DATA
      */
-    override suspend fun getGitHubData(request: GetGitHubReposRequest): List<GithubAPI.Repo>{
+    override suspend fun getGitHubData(request: GetGitHubReposRequest): List<GithubAPI.Repo> {
 
         if (networkSystem.isNetworkAvailable()) {
             return mutableListOf()
@@ -22,7 +22,7 @@ class FakeNetworkDataSource(private val networkSystem: NetworkSystemAbstract): I
     /**
      * GET GITHUB DATA
      */
-    override suspend fun getGitHubContributors(request: GetGitHubContributorsRequest): List<GithubAPI.Contributor>{
+    override suspend fun getGitHubContributors(request: GetGitHubContributorsRequest): List<GithubAPI.Contributor> {
 
         if (networkSystem.isNetworkAvailable()) {
             return mutableListOf()

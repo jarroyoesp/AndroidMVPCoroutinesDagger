@@ -48,7 +48,7 @@ class HomePresenter(
         }
     }
 
-    fun onSuccesGetRepositoriesList(repositoriesList: List<GithubAPI.Repo>){
+    fun onSuccesGetRepositoriesList(repositoriesList: List<GithubAPI.Repo>) {
         view.onSuccessGetRepositories(repositoriesList)
         getContributors("jarroyoesp", repositoriesList.get(0).name)
     }
@@ -56,7 +56,7 @@ class HomePresenter(
     /**
      * GET CONTRIBUTORS FFROM REPOSITORY
      */
-    fun getContributors(owner: String, repositorieName: String){
+    fun getContributors(owner: String, repositorieName: String) {
         uiScope.launch {
             val request2 = GetGitHubContributorsRequest(owner, repositorieName)
             val result2 = getGitHubContributorsUseCase.execute(request2)

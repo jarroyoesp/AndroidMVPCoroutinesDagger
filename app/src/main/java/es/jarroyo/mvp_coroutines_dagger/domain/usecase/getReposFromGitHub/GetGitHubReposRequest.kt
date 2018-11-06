@@ -2,7 +2,6 @@ package es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub
 
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.base.BaseRequest
 
-
 /**
  * Created by javierarroyo on 24/1/18.
  */

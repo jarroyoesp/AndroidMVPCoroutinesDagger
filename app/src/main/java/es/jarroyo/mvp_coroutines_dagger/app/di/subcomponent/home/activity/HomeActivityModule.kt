@@ -23,6 +23,4 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
         getGitHubReposUseCase: GetGitHubReposUseCase,
         getGitHubContributorsUseCase: GetGitHubContributorsUseCase
     ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase)
-
-
 }
