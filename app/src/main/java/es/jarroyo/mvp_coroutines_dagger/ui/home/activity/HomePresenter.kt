@@ -7,45 +7,33 @@ import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.Get
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.GetGitHubContributorsUseCase
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import es.jarroyo.mvp_coroutines_dagger.utils.launchSilent
+import kotlin.coroutines.CoroutineContext
 
 class HomePresenter(
     override val view: HomeView,
     override val navigator: Navigator,
     val getGitHubReposUseCase: GetGitHubReposUseCase,
-    val getGitHubContributorsUseCase: GetGitHubContributorsUseCase
+    val getGitHubContributorsUseCase: GetGitHubContributorsUseCase,
+    private val coroutineContext: CoroutineContext
+
 ) : Presenter<HomeView> {
 
-    /**
-     * This is the job for all coroutines started by this Presenter.
-     * Cancelling this job will cancel all coroutines started by this Presenter.
-     */
-    private val presenterJob = Job()
-
-    /**
-     * This is the main scope for all coroutines launched by Presenter.
-     *
-     * Since we pass viewModelJob, you can cancel all coroutines launched by uiScope by calling
-     * presenterJob.cancel()
-     */
-    private val uiScope = CoroutineScope(Dispatchers.Main + presenterJob)
+    override fun initialize() {
+        getRepositoriesList()
+    }
 
     /**
      * GET REPOSITORIES FROM GITHUB
      */
-    fun getRepositoriesList() {
-        uiScope.launch {
+    fun getRepositoriesList() = launchSilent(coroutineContext) {
             val request = GetGitHubReposRequest("jarroyoesp")
             val result = getGitHubReposUseCase.execute(request)
-            if (result.error == null && result.data != null) {
+            if (result != null && result.error == null && result.data != null) {
                 onSuccesGetRepositoriesList(result.data!!)
-            } else if (result.error != null) {
+            } else if (result != null && result.error != null) {
                 view.onErrorGetContributors(result.error!!)
             }
-        }
     }
 
     fun onSuccesGetRepositoriesList(repositoriesList: List<GithubAPI.Repo>) {
@@ -56,16 +44,14 @@ class HomePresenter(
     /**
      * GET CONTRIBUTORS FFROM REPOSITORY
      */
-    fun getContributors(owner: String, repositorieName: String) {
-        uiScope.launch {
+    fun getContributors(owner: String, repositorieName: String) = launchSilent(coroutineContext) {
             val request2 = GetGitHubContributorsRequest(owner, repositorieName)
             val result2 = getGitHubContributorsUseCase.execute(request2)
-            if (result2.error == null && result2.data != null) {
+            if (result2 != null && result2.error == null && result2.data != null) {
                 view.onSuccessGetContributors(result2.data!!)
-            } else if (result2.error != null) {
+            } else if (result2 != null && result2.error != null) {
                 view.onErrorGetContributors(result2.error!!)
             }
-        }
     }
 
     override fun clearView() {

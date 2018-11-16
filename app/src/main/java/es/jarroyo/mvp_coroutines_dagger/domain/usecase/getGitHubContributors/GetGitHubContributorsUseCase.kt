@@ -7,7 +7,7 @@ import es.jarroyo.mvp_coroutines_dagger.domain.usecase.base.BaseUseCase
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.base.Response
 import retrofit2.HttpException
 
-class GetGitHubContributorsUseCase(val repository: GitHubRepository) : BaseUseCase<GetGitHubContributorsRequest, List<GithubAPI.Contributor>>() {
+open class GetGitHubContributorsUseCase(val repository: GitHubRepository) : BaseUseCase<GetGitHubContributorsRequest, List<GithubAPI.Contributor>>() {
 
     override suspend fun run(): Response<List<GithubAPI.Contributor>> {
         try {

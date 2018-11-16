@@ -71,6 +71,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
 
     // For local unit tests on your development machine
     testImplementation "org.mockito:mockito-core:$mockito_version"

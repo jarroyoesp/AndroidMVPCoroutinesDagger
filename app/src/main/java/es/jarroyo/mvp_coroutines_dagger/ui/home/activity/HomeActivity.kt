@@ -23,7 +23,7 @@ class HomeActivity : BaseActivity(), HomeView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter.getRepositoriesList()
+        presenter.initialize()
     }
 
     /**

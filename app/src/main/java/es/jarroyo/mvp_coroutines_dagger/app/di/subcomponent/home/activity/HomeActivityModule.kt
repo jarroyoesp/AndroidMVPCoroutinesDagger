@@ -9,6 +9,8 @@ import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGit
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeActivity
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomePresenter
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeView
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 @Module
 class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
@@ -17,10 +19,15 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
     fun provideView(): HomeView = activity as HomeView
 
     @Provides
+    fun provideCoroutineContext(): CoroutineContext = Dispatchers.Main
+
+
+    @Provides
     fun providePresenter(
         view: HomeView,
         navigator: Navigator,
         getGitHubReposUseCase: GetGitHubReposUseCase,
-        getGitHubContributorsUseCase: GetGitHubContributorsUseCase
-    ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase)
+        getGitHubContributorsUseCase: GetGitHubContributorsUseCase,
+        coroutineContext: CoroutineContext
+    ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase, coroutineContext)
 }

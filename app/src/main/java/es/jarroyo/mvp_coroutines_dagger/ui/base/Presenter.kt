@@ -9,6 +9,8 @@ interface Presenter<out T : PresentationView> :
     val view: T
     val navigator: Navigator
 
+    fun initialize()
+
     fun clearView()
 
     override fun onNetworkConnectionError() {
