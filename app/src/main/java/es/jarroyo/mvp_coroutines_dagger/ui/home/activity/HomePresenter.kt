@@ -37,8 +37,12 @@ class HomePresenter(
     }
 
     fun onSuccesGetRepositoriesList(repositoriesList: List<GithubAPI.Repo>) {
-        view.onSuccessGetRepositories(repositoriesList)
-        getContributors("jarroyoesp", repositoriesList.get(0).name)
+        if (repositoriesList.isNullOrEmpty()) {
+            view.onEmptyRepositories()
+        } else {
+            view.onSuccessGetRepositories(repositoriesList)
+            getContributors("jarroyoesp", repositoriesList.get(0).name)
+        }
     }
 
     /**

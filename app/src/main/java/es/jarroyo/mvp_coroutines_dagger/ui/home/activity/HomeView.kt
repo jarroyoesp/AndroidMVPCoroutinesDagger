@@ -9,4 +9,5 @@ interface HomeView : PresentationView {
 
     fun onSuccessGetContributors(data: List<GithubAPI.Contributor>)
     fun onErrorGetContributors(message: String)
+    fun onEmptyRepositories()
 }

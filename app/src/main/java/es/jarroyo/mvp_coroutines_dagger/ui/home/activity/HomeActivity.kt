@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
 class HomeActivity : BaseActivity(), HomeView {
-
     override var layoutId = R.layout.activity_home
 
     @Inject
@@ -51,5 +50,9 @@ class HomeActivity : BaseActivity(), HomeView {
 
     override fun onErrorGetContributors(message: String) {
         activity_home_tv_contributors.text = message
+    }
+
+    override fun onEmptyRepositories() {
+        activity_home_tv_contributors.text = "EMPTY_REPOSITORIES"
     }
 }

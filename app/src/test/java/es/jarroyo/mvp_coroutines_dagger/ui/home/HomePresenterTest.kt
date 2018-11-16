@@ -63,6 +63,20 @@ class HomePresenterTest {
         }
     }
 
+    @Test
+    fun `should show empty repositories when repositories are received empty`() {
+        runBlocking {
+            val request = GetGitHubReposRequest("jarroyoesp")
+            val emptyList = mutableListOf<GithubAPI.Repo>()
+            whenever(getGitHubReposUseCase.execute(request)).thenReturn(Response(emptyList))
+
+            presenter.initialize()
+
+            Mockito.verify(homeView, Mockito.times(1))
+                .onEmptyRepositories()
+        }
+    }
+
 
     private fun createMockedPresenter(): HomePresenter {
         val presenter = HomePresenter(homeView, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase, Unconfined)
