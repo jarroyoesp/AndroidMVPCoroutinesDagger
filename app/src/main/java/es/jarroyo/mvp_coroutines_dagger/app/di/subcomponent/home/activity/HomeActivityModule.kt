@@ -10,6 +10,7 @@ import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeActivity
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomePresenter
 import es.jarroyo.mvp_coroutines_dagger.ui.home.activity.HomeView
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 @Module
@@ -17,6 +18,9 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
 
     @Provides
     fun provideView(): HomeView = activity as HomeView
+
+    @Provides
+    fun providesJob() = Job()
 
     @Provides
     fun provideCoroutineContext(): CoroutineContext = Dispatchers.Main
@@ -28,6 +32,7 @@ class HomeActivityModule(activity: HomeActivity) : ActivityModule(activity) {
         navigator: Navigator,
         getGitHubReposUseCase: GetGitHubReposUseCase,
         getGitHubContributorsUseCase: GetGitHubContributorsUseCase,
-        coroutineContext: CoroutineContext
-    ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase, coroutineContext)
+        coroutineContext: CoroutineContext,
+        job: Job
+    ) = HomePresenter(view, navigator, getGitHubReposUseCase, getGitHubContributorsUseCase, coroutineContext, job)
 }

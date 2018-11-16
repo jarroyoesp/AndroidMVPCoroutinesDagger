@@ -8,6 +8,7 @@ import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getGitHubContributors.Get
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposRequest
 import es.jarroyo.mvp_coroutines_dagger.domain.usecase.getReposFromGitHub.GetGitHubReposUseCase
 import es.jarroyo.mvp_coroutines_dagger.utils.launchSilent
+import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
 class HomePresenter(
@@ -15,7 +16,8 @@ class HomePresenter(
     override val navigator: Navigator,
     val getGitHubReposUseCase: GetGitHubReposUseCase,
     val getGitHubContributorsUseCase: GetGitHubContributorsUseCase,
-    private val coroutineContext: CoroutineContext
+    val coroutineContext: CoroutineContext,
+    val job: Job
 
 ) : Presenter<HomeView> {
 
@@ -26,7 +28,7 @@ class HomePresenter(
     /**
      * GET REPOSITORIES FROM GITHUB
      */
-    fun getRepositoriesList() = launchSilent(coroutineContext) {
+    fun getRepositoriesList() = launchSilent(coroutineContext, job) {
             val request = GetGitHubReposRequest("jarroyoesp")
             val result = getGitHubReposUseCase.execute(request)
             if (result != null && result.error == null && result.data != null) {
@@ -48,7 +50,7 @@ class HomePresenter(
     /**
      * GET CONTRIBUTORS FFROM REPOSITORY
      */
-    fun getContributors(owner: String, repositorieName: String) = launchSilent(coroutineContext) {
+    fun getContributors(owner: String, repositorieName: String) = launchSilent(coroutineContext, job) {
             val request2 = GetGitHubContributorsRequest(owner, repositorieName)
             val result2 = getGitHubContributorsUseCase.execute(request2)
             if (result2 != null && result2.error == null && result2.data != null) {
